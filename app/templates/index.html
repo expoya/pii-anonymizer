@@ -8,69 +8,76 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>PII Anonymizer</h1>
-            <p class="subtitle">Automatische Anonymisierung personenbezogener Daten</p>
-        </header>
-
-        <div class="controls">
+        <div class="top-bar">
+            <div class="header-left">
+                <h1>PII Anonymizer</h1>
+                <p class="subtitle">Automatische Anonymisierung personenbezogener Daten</p>
+            </div>
             <div class="language-toggle">
-                <label>
+                <label class="toggle-option">
                     <input type="radio" name="language" value="de" checked>
-                    <span>Deutsch</span>
+                    <span>DE</span>
                 </label>
-                <label>
+                <label class="toggle-option">
                     <input type="radio" name="language" value="en">
-                    <span>English</span>
+                    <span>EN</span>
                 </label>
             </div>
         </div>
 
+        <div class="action-bar">
+            <button id="anonymizeBtn" class="btn-primary">
+                <span>Anonymisieren</span>
+            </button>
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <span>Verarbeite...</span>
+            </div>
+        </div>
+
         <div class="content">
-            <div class="input-section">
+            <div class="text-section">
                 <div class="section-header">
                     <h2>Eingabe</h2>
-                    <span class="entity-count" id="inputCount">0 Zeichen</span>
+                    <span class="char-count" id="inputCount">0 Zeichen</span>
                 </div>
                 <textarea
                     id="inputText"
-                    placeholder="Text mit personenbezogenen Daten hier einfügen...&#10;&#10;Beispiel:&#10;Max Mustermann wohnt in Berlin.&#10;Seine Email ist max@example.com und&#10;seine Telefonnummer ist +49 123 456789."
-                    rows="15"
+                    placeholder="Text mit personenbezogenen Daten hier einfügen...
+
+Beispiel:
+Max Mustermann wohnt in Berlin.
+Seine Email ist max@example.com und
+seine Telefonnummer ist +49 123 456789."
+                    rows="25"
                 ></textarea>
             </div>
 
-            <div class="action-section">
-                <button id="anonymizeBtn" class="btn-primary">
-                    Anonymisieren
-                </button>
-                <div class="loading" id="loading" style="display: none;">
-                    <div class="spinner"></div>
-                    <span>Verarbeite...</span>
-                </div>
-            </div>
-
-            <div class="output-section">
+            <div class="text-section">
                 <div class="section-header">
-                    <h2>Anonymisierter Text</h2>
+                    <h2>Anonymisiert</h2>
                     <div class="output-actions">
-                        <span class="entity-count" id="entityCount">0 Entities erkannt</span>
-                        <button id="copyBtn" class="btn-secondary" disabled>
-                            In Zwischenablage kopieren
+                        <span class="entity-count" id="entityCount">0 erkannt</span>
+                        <button id="copyBtn" class="btn-icon" disabled title="In Zwischenablage kopieren">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
                 <textarea
                     id="outputText"
                     placeholder="Anonymisierter Text erscheint hier..."
-                    rows="15"
+                    rows="25"
                     readonly
                 ></textarea>
             </div>
         </div>
 
-        <div class="info-section" id="entitiesInfo" style="display: none;">
+        <div class="entities-section" id="entitiesInfo" style="display: none;">
             <h3>Erkannte Entities</h3>
-            <div id="entitiesList"></div>
+            <div id="entitiesList" class="entities-list"></div>
         </div>
 
         <div class="error-message" id="errorMessage" style="display: none;">
@@ -79,7 +86,6 @@
 
         <footer>
             <p>Powered by <a href="https://github.com/microsoft/presidio" target="_blank">Microsoft Presidio</a></p>
-            <p class="info-text">Erkannte Entity-Typen: PERSON, EMAIL, PHONE, LOCATION, DATE_TIME, IBAN, CREDIT_CARD, IP_ADDRESS, URL</p>
         </footer>
     </div>
 

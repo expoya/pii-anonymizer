@@ -83,8 +83,8 @@ async function anonymizeText() {
         // Update entity count
         const count = data.entities.length;
         entityCount.textContent = count === 1
-            ? '1 Entity erkannt'
-            : `${count} Entities erkannt`;
+            ? '1 erkannt'
+            : `${count} erkannt`;
 
         // Enable copy button if there's output
         if (data.anonymized) {
@@ -146,13 +146,12 @@ async function copyToClipboard() {
         await navigator.clipboard.writeText(text);
 
         // Visual feedback
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = '✓ Kopiert!';
-        copyBtn.style.backgroundColor = 'var(--success-color)';
+        copyBtn.classList.add('copied');
+        copyBtn.title = 'Kopiert!';
 
         setTimeout(() => {
-            copyBtn.textContent = originalText;
-            copyBtn.style.backgroundColor = '';
+            copyBtn.classList.remove('copied');
+            copyBtn.title = 'In Zwischenablage kopieren';
         }, 2000);
 
     } catch (error) {
