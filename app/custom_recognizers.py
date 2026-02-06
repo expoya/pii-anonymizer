@@ -15,25 +15,29 @@ class GermanTitleRecognizer(PatternRecognizer):
     - "geehrter Herr Dr. Wagner"
     """
 
+    # Pattern for names with hyphens and multiple parts
+    # Matches: Müller, Müller-Schmidt, Hans Müller, Hans-Peter Müller-Schmidt
+    NAME_PATTERN = r"[A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*(?:\s+[A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*)?"
+
     PATTERNS = [
         Pattern(
             "herr_pattern",
-            r"\b(?:Herr|Herrn)\s+(?:Dr\.\s+|Prof\.\s+|Mag\.\s+|Dipl\.-Ing\.\s+)?([A-ZÄÖÜ][a-zäöüß]+(?:\s+[A-ZÄÖÜ][a-zäöüß]+)?)",
+            rf"\b(?:Herr|Herrn)\s+(?:Dr\.\s+|Prof\.\s+|Mag\.\s+|Dipl\.-Ing\.\s+)?({NAME_PATTERN})",
             0.85,
         ),
         Pattern(
             "frau_pattern",
-            r"\b(?:Frau)\s+(?:Dr\.\s+|Prof\.\s+|Mag\.\s+|Dipl\.-Ing\.\s+)?([A-ZÄÖÜ][a-zäöüß]+(?:\s+[A-ZÄÖÜ][a-zäöüß]+)?)",
+            rf"\b(?:Frau)\s+(?:Dr\.\s+|Prof\.\s+|Mag\.\s+|Dipl\.-Ing\.\s+)?({NAME_PATTERN})",
             0.85,
         ),
         Pattern(
             "sehr_geehrte_pattern",
-            r"\bSehr\s+geehrte(?:r|s)?\s+(?:Herr|Herrn|Frau)\s+(?:Dr\.\s+|Prof\.\s+|Mag\.\s+)?([A-ZÄÖÜ][a-zäöüß]+(?:\s+[A-ZÄÖÜ][a-zäöüß]+)?)",
+            rf"\bSehr\s+geehrte(?:r|s)?\s+(?:Herr|Herrn|Frau)\s+(?:Dr\.\s+|Prof\.\s+|Mag\.\s+)?({NAME_PATTERN})",
             0.9,
         ),
         Pattern(
             "liebe_pattern",
-            r"\b(?:Liebe|Lieber)\s+(?:Frau|Herr|Herrn)\s+([A-ZÄÖÜ][a-zäöüß]+)",
+            rf"\b(?:Liebe|Lieber)\s+(?:Frau|Herr|Herrn)\s+({NAME_PATTERN})",
             0.85,
         ),
     ]

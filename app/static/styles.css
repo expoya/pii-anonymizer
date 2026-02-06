@@ -96,8 +96,9 @@ body {
 .action-bar {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .btn-primary {
