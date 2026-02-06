@@ -62,6 +62,7 @@ class PIIAnonymizer:
             language=language,
             entities=[
                 "PERSON",
+                "GERMAN_TITLE_NAME",  # Custom recognizer entity type
                 "EMAIL_ADDRESS",
                 "PHONE_NUMBER",
                 "LOCATION",
