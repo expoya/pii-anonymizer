@@ -82,6 +82,7 @@ class PIIAnonymizer:
         # Define explicit operators for each entity type instead of using templates
         operators = {
             "PERSON": OperatorConfig("replace", {"new_value": "[PERSON]"}),
+            "GERMAN_TITLE_NAME": OperatorConfig("replace", {"new_value": "[PERSON]"}),
             "EMAIL_ADDRESS": OperatorConfig("replace", {"new_value": "[EMAIL_ADDRESS]"}),
             "PHONE_NUMBER": OperatorConfig("replace", {"new_value": "[PHONE_NUMBER]"}),
             "LOCATION": OperatorConfig("replace", {"new_value": "[LOCATION]"}),

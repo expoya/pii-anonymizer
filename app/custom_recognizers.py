@@ -57,7 +57,7 @@ class GermanTitleRecognizer(PatternRecognizer):
         patterns: Optional[List[Pattern]] = None,
         context: Optional[List[str]] = None,
         supported_language: str = "de",
-        supported_entity: str = "PERSON",
+        supported_entity: str = "GERMAN_TITLE_NAME",
     ):
         patterns = patterns if patterns else self.PATTERNS
         context = context if context else self.CONTEXT
