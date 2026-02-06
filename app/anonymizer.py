@@ -79,8 +79,18 @@ class PIIAnonymizer:
         )
 
         # Create anonymization config - replace with entity type in brackets
+        # Define explicit operators for each entity type instead of using templates
         operators = {
-            "DEFAULT": OperatorConfig("replace", {"new_value": "[{entity_type}]"})
+            "PERSON": OperatorConfig("replace", {"new_value": "[PERSON]"}),
+            "EMAIL_ADDRESS": OperatorConfig("replace", {"new_value": "[EMAIL_ADDRESS]"}),
+            "PHONE_NUMBER": OperatorConfig("replace", {"new_value": "[PHONE_NUMBER]"}),
+            "LOCATION": OperatorConfig("replace", {"new_value": "[LOCATION]"}),
+            "DATE_TIME": OperatorConfig("replace", {"new_value": "[DATE_TIME]"}),
+            "IBAN_CODE": OperatorConfig("replace", {"new_value": "[IBAN_CODE]"}),
+            "CREDIT_CARD": OperatorConfig("replace", {"new_value": "[CREDIT_CARD]"}),
+            "IP_ADDRESS": OperatorConfig("replace", {"new_value": "[IP_ADDRESS]"}),
+            "URL": OperatorConfig("replace", {"new_value": "[URL]"}),
+            "DEFAULT": OperatorConfig("replace", {"new_value": "[PII]"})
         }
 
         # Anonymize the text
