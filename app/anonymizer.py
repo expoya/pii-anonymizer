@@ -16,8 +16,8 @@ class PIIAnonymizer:
         configuration = {
             "nlp_engine_name": "spacy",
             "models": [
-                {"lang_code": "de", "model_name": "de_core_news_lg"},
-                {"lang_code": "en", "model_name": "en_core_web_lg"}
+                {"lang_code": "de", "model_name": "de_core_news_md"},
+                {"lang_code": "en", "model_name": "en_core_web_md"}
             ]
         }
 
