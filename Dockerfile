@@ -13,9 +13,9 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download smaller spaCy models (md instead of lg for faster builds)
-RUN python -m spacy download de_core_news_md && \
-    python -m spacy download en_core_web_md
+# Download smallest spaCy models (sm for fastest builds)
+RUN python -m spacy download de_core_news_sm && \
+    python -m spacy download en_core_web_sm
 
 # Copy application code
 COPY app/ ./app/
