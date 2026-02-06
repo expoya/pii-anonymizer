@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PII Anonymizer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PII Anonymizer</h1>
+            <p class="subtitle">Automatische Anonymisierung personenbezogener Daten</p>
+        </header>
+
+        <div class="controls">
+            <div class="language-toggle">
+                <label>
+                    <input type="radio" name="language" value="de" checked>
+                    <span>Deutsch</span>
+                </label>
+                <label>
+                    <input type="radio" name="language" value="en">
+                    <span>English</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="input-section">
+                <div class="section-header">
+                    <h2>Eingabe</h2>
+                    <span class="entity-count" id="inputCount">0 Zeichen</span>
+                </div>
+                <textarea
+                    id="inputText"
+                    placeholder="Text mit personenbezogenen Daten hier einfügen...&#10;&#10;Beispiel:&#10;Max Mustermann wohnt in Berlin.&#10;Seine Email ist max@example.com und&#10;seine Telefonnummer ist +49 123 456789."
+                    rows="15"
+                ></textarea>
+            </div>
+
+            <div class="action-section">
+                <button id="anonymizeBtn" class="btn-primary">
+                    Anonymisieren
+                </button>
+                <div class="loading" id="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <span>Verarbeite...</span>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="section-header">
+                    <h2>Anonymisierter Text</h2>
+                    <div class="output-actions">
+                        <span class="entity-count" id="entityCount">0 Entities erkannt</span>
+                        <button id="copyBtn" class="btn-secondary" disabled>
+                            In Zwischenablage kopieren
+                        </button>
+                    </div>
+                </div>
+                <textarea
+                    id="outputText"
+                    placeholder="Anonymisierter Text erscheint hier..."
+                    rows="15"
+                    readonly
+                ></textarea>
+            </div>
+        </div>
+
+        <div class="info-section" id="entitiesInfo" style="display: none;">
+            <h3>Erkannte Entities</h3>
+            <div id="entitiesList"></div>
+        </div>
+
+        <div class="error-message" id="errorMessage" style="display: none;">
+            <strong>Fehler:</strong> <span id="errorText"></span>
+        </div>
+
+        <footer>
+            <p>Powered by <a href="https://github.com/microsoft/presidio" target="_blank">Microsoft Presidio</a></p>
+            <p class="info-text">Erkannte Entity-Typen: PERSON, EMAIL, PHONE, LOCATION, DATE_TIME, IBAN, CREDIT_CARD, IP_ADDRESS, URL</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
