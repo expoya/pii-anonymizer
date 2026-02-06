@@ -15,8 +15,9 @@ class GermanTitleRecognizer(PatternRecognizer):
     - "geehrter Herr Dr. Wagner"
     """
 
-    # Very simple test pattern to debug
+    # Patterns for German name detection
     PATTERNS = [
+        # Title + Name patterns
         Pattern(
             "frau_mag_name",
             r"Frau\s+Mag\.\s+([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+(?:\s+[\wäöüßÄÖÜ\-]+)?)",
@@ -31,6 +32,22 @@ class GermanTitleRecognizer(PatternRecognizer):
             "herr_title_name",
             r"Herr(?:n)?\s+(?:Dr\.|Prof\.|Mag\.)?\s*([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+(?:\s+[\wäöüßÄÖÜ\-]+)?)",
             0.85,
+        ),
+        # Greeting + Full Name patterns
+        Pattern(
+            "mit_freundlichen_gruessen_name",
+            r"Mit\s+freundlichen\s+Grüßen\s+([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+\s+[A-ZÄÖÜ][\wäöüßÄÖÜ\-]+)",
+            0.9,
+        ),
+        Pattern(
+            "hochachtungsvoll_name",
+            r"Hochachtungsvoll\s+([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+\s+[A-ZÄÖÜ][\wäöüßÄÖÜ\-]+)",
+            0.9,
+        ),
+        Pattern(
+            "viele_gruesse_name",
+            r"Viele\s+Grüße\s+([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+\s+[A-ZÄÖÜ][\wäöüßÄÖÜ\-]+)",
+            0.9,
         ),
     ]
 
