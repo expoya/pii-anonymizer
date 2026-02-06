@@ -4,6 +4,25 @@ from typing import List, Optional
 from presidio_analyzer import Pattern, PatternRecognizer
 
 
+# Most common German first names (Top 100 across generations)
+COMMON_GERMAN_FIRST_NAMES = [
+    # Female names
+    "Maria", "Anna", "Katharina", "Elisabeth", "Sophie", "Johanna", "Laura", "Lisa",
+    "Julia", "Sarah", "Lena", "Hannah", "Emma", "Mia", "Lea", "Leonie", "Amelie",
+    "Charlotte", "Emilia", "Luisa", "Marie", "Paula", "Clara", "Sophia", "Maja",
+    "Magdalena", "Christina", "Barbara", "Petra", "Sabine", "Andrea", "Claudia",
+    "Susanne", "Monika", "Gabriele", "Ursula", "Helga", "Ingrid", "Gisela",
+    # Male names
+    "Thomas", "Michael", "Andreas", "Peter", "Klaus", "Hans", "Wolfgang", "Jürgen",
+    "Dieter", "Horst", "Werner", "Günter", "Gerhard", "Heinz", "Manfred", "Helmut",
+    "Josef", "Stefan", "Christian", "Daniel", "Alexander", "Martin", "Markus",
+    "Sebastian", "Florian", "Matthias", "Lukas", "Jonas", "Felix", "Leon", "Paul",
+    "Max", "Maximilian", "David", "Simon", "Tobias", "Jan", "Tim", "Philipp",
+    "Benjamin", "Julian", "Niklas", "Fabian", "Moritz", "Johannes", "Christoph",
+    "Robert", "Franz", "Karl", "Friedrich", "Wilhelm", "Ludwig", "Otto", "Heinrich"
+]
+
+
 class GermanTitleRecognizer(PatternRecognizer):
     """
     Recognize names following German titles like "Herr" or "Frau".
@@ -14,6 +33,9 @@ class GermanTitleRecognizer(PatternRecognizer):
     - "Sehr geehrte Frau Luger"
     - "geehrter Herr Dr. Wagner"
     """
+
+    # Build regex pattern from common first names
+    _first_names_pattern = "|".join(COMMON_GERMAN_FIRST_NAMES)
 
     # Patterns for German name detection
     PATTERNS = [
@@ -48,6 +70,12 @@ class GermanTitleRecognizer(PatternRecognizer):
             "viele_gruesse_name",
             r"Viele\s+Grüße\s+([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+\s+[A-ZÄÖÜ][\wäöüßÄÖÜ\-]+)",
             0.9,
+        ),
+        # Common German first name + last name pattern
+        Pattern(
+            "common_german_firstname_lastname",
+            rf"\b((?:{_first_names_pattern})\s+[A-ZÄÖÜ][a-zäöüß\-]+)",
+            0.85,
         ),
     ]
 
