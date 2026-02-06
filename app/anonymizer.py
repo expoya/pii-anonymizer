@@ -5,6 +5,7 @@ from presidio_analyzer import AnalyzerEngine, RecognizerRegistry
 from presidio_analyzer.nlp_engine import NlpEngineProvider
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.entities import OperatorConfig
+from app.custom_recognizers import GermanTitleRecognizer
 
 
 class PIIAnonymizer:
@@ -24,9 +25,18 @@ class PIIAnonymizer:
         provider = NlpEngineProvider(nlp_configuration=configuration)
         nlp_engine = provider.create_engine()
 
-        # Initialize analyzer with NLP engine
+        # Create registry and add custom recognizers
+        registry = RecognizerRegistry()
+        registry.load_predefined_recognizers()
+
+        # Add German title recognizer for better name detection
+        german_title_recognizer = GermanTitleRecognizer()
+        registry.add_recognizer(german_title_recognizer)
+
+        # Initialize analyzer with NLP engine and custom registry
         self.analyzer = AnalyzerEngine(
             nlp_engine=nlp_engine,
+            registry=registry,
             supported_languages=["de", "en"]
         )
 

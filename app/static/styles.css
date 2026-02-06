@@ -266,22 +266,22 @@ textarea:focus {
 .entity-item {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    background-color: #f8f9fa;
-    border-left: 3px solid var(--primary-color);
-    border-radius: 4px;
-    font-size: 0.85rem;
+    gap: 5px;
+    padding: 3px 10px;
+    background-color: var(--primary-color);
+    border-radius: 12px;
+    font-size: 0.8rem;
 }
 
 .entity-type {
     font-weight: 600;
-    color: var(--primary-color);
+    color: white;
 }
 
 .entity-text {
     font-family: 'Courier New', monospace;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem;
 }
 
 /* Error Message */
