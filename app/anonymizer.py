@@ -31,9 +31,9 @@ class PIIAnonymizer:
             supported_languages=["de", "en"]
         )
 
-        # Add custom German title recognizer to existing registry
-        german_title_recognizer = GermanTitleRecognizer()
-        self.analyzer.registry.add_recognizer(german_title_recognizer)
+        # Temporarily disable custom recognizer to test base functionality
+        # german_title_recognizer = GermanTitleRecognizer()
+        # self.analyzer.registry.add_recognizer(german_title_recognizer)
 
         # Initialize anonymizer
         self.anonymizer = AnonymizerEngine()
@@ -74,10 +74,9 @@ class PIIAnonymizer:
         )
 
         # Create anonymization config - replace with entity type in brackets
-        # Define explicit operators for each entity type instead of using templates
+        # Define explicit operators for each entity type
         operators = {
             "PERSON": OperatorConfig("replace", {"new_value": "[PERSON]"}),
-            "GERMAN_TITLE_NAME": OperatorConfig("replace", {"new_value": "[PERSON]"}),
             "EMAIL_ADDRESS": OperatorConfig("replace", {"new_value": "[EMAIL_ADDRESS]"}),
             "PHONE_NUMBER": OperatorConfig("replace", {"new_value": "[PHONE_NUMBER]"}),
             "LOCATION": OperatorConfig("replace", {"new_value": "[LOCATION]"}),
