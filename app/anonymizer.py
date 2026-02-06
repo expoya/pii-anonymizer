@@ -25,20 +25,15 @@ class PIIAnonymizer:
         provider = NlpEngineProvider(nlp_configuration=configuration)
         nlp_engine = provider.create_engine()
 
-        # Create registry and add custom recognizers
-        registry = RecognizerRegistry()
-        registry.load_predefined_recognizers()
-
-        # Add German title recognizer for better name detection
-        german_title_recognizer = GermanTitleRecognizer()
-        registry.add_recognizer(german_title_recognizer)
-
-        # Initialize analyzer with NLP engine and custom registry
+        # Initialize analyzer with standard registry first
         self.analyzer = AnalyzerEngine(
             nlp_engine=nlp_engine,
-            registry=registry,
             supported_languages=["de", "en"]
         )
+
+        # Add custom German title recognizer to existing registry
+        german_title_recognizer = GermanTitleRecognizer()
+        self.analyzer.registry.add_recognizer(german_title_recognizer)
 
         # Initialize anonymizer
         self.anonymizer = AnonymizerEngine()
