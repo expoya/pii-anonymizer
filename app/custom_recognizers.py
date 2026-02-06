@@ -15,25 +15,26 @@ class GermanTitleRecognizer(PatternRecognizer):
     - "geehrter Herr Dr. Wagner"
     """
 
-    # Simplified pattern for names - matches single or hyphenated surnames
-    # More reliable than complex nested patterns
+    # Very simple test pattern to debug
     PATTERNS = [
         Pattern(
-            "german_title_name",
-            r"\b(?:Sehr\s+geehrte(?:r|s)?\s+)?(?:Frau|Herr|Herrn)\s+(?:Dr\.|Prof\.|Mag\.|Dipl\.-Ing\.)?\s*([A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*(?:\s+[A-ZÄÖÜ][a-zäöüß]+(?:-[A-ZÄÖÜ][a-zäöüß]+)*)?)",
-            0.75,
+            "frau_mag_name",
+            r"Frau\s+Mag\.\s+([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+(?:\s+[\wäöüßÄÖÜ\-]+)?)",
+            0.85,
+        ),
+        Pattern(
+            "frau_dr_name",
+            r"Frau\s+Dr\.\s+([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+(?:\s+[\wäöüßÄÖÜ\-]+)?)",
+            0.85,
+        ),
+        Pattern(
+            "herr_title_name",
+            r"Herr(?:n)?\s+(?:Dr\.|Prof\.|Mag\.)?\s*([A-ZÄÖÜ][\wäöüßÄÖÜ\-]+(?:\s+[\wäöüßÄÖÜ\-]+)?)",
+            0.85,
         ),
     ]
 
-    CONTEXT = [
-        "geehrte",
-        "geehrter",
-        "sehr",
-        "liebe",
-        "lieber",
-        "von",
-        "für",
-    ]
+    CONTEXT = []
 
     def __init__(
         self,
